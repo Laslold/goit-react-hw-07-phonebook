@@ -9,8 +9,6 @@ import ContactList from './ContactList';
 import Filter from './Filter';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  add,
-  remove,
   filter,
   fetchContactThunk,
   addContactThunk,

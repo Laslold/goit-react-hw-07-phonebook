@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { nanoid } from 'nanoid';
+
 import { addContacts, deleteContacts, getContacts } from 'shared/api';
 export const fetchContactThunk = createAsyncThunk(
   'contact/fetchContactThunk',
