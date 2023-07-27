@@ -1,4 +1,4 @@
-// import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import ContactForm from './ContactForm';
 
 import Container from './Container';
@@ -8,7 +8,14 @@ import ContactList from './ContactList';
 
 import Filter from './Filter';
 import { useDispatch, useSelector } from 'react-redux';
-import { add, remove, filter } from '../redux/phoneBook/phoneBook-slice';
+import {
+  add,
+  remove,
+  filter,
+  fetchContactThunk,
+  addContactThunk,
+  deleteContactsThunk,
+} from '../redux/phoneBook/phoneBook-slice';
 import {
   getFilterContacts,
   getFilter,
@@ -24,7 +31,7 @@ const App = () => {
       ({ name }) => name.toLowerCase() === data.name.toLowerCase()
     );
     if (!isInclude) {
-      dispatch(add(data));
+      dispatch(addContactThunk(data));
       return;
     }
     alert(`${isInclude.name} is already in contacts`);
@@ -32,12 +39,15 @@ const App = () => {
   };
 
   const onRemoveContact = id => {
-    dispatch(remove(id));
+    dispatch(deleteContactsThunk(id));
   };
 
   const onChangeFilter = ({ target }) => {
     dispatch(filter(target.value));
   };
+  useEffect(() => {
+    dispatch(fetchContactThunk());
+  }, [dispatch]);
   // const [contacts, setContacts] = useState([]);
   // const [filter, setFilter] = useState('');
   // const firstRender = useRef(true); //отложен первый запуск

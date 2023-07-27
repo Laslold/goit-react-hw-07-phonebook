@@ -1,14 +1,17 @@
-import { ListStyled } from './ContactList.styled';
+import { ListStyled, ListStyledItems } from './ContactList.styled';
 import PropTypes from 'prop-types';
 import Button from 'components/Button/Button';
 const ContactList = ({ contacts, removeContact }) => {
-  const elem = contacts.map(({ id, name, number }) => (
+  const elem = contacts.map(({ id, name, phone }) => (
     <ListStyled key={id}>
-      {name} : {number}
-      <Button onClick={() => removeContact(id)}>Delete</Button>
+      <p>{name} : </p>
+      <p>
+        {phone}
+        <Button onClick={() => removeContact(id)}>Delete</Button>
+      </p>
     </ListStyled>
   ));
-  return <ul>{elem}</ul>;
+  return <ListStyledItems>{elem}</ListStyledItems>;
 };
 ContactList.propTypes = {
   contacts: PropTypes.array.isRequired,
