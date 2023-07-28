@@ -8,12 +8,12 @@ import ContactList from './ContactList';
 
 import Filter from './Filter';
 import { useDispatch, useSelector } from 'react-redux';
+import { filter } from '../redux/phoneBook/phoneBook-slice';
 import {
-  filter,
   fetchContactThunk,
   addContactThunk,
   deleteContactsThunk,
-} from '../redux/phoneBook/phoneBook-slice';
+} from '../redux/phoneBook/phoneBook-operation';
 import {
   getFilterContacts,
   getFilter,
@@ -46,58 +46,7 @@ const App = () => {
   useEffect(() => {
     dispatch(fetchContactThunk());
   }, [dispatch]);
-  // const [contacts, setContacts] = useState([]);
-  // const [filter, setFilter] = useState('');
-  // const firstRender = useRef(true); //отложен первый запуск
 
-  // useEffect(() => {
-  //   if (!firstRender.current) {
-  //     //пропускаем запись в сторедж при старте
-  //     localStorage.setItem('contact', JSON.stringify(contacts));
-  //   }
-  // }, [contacts]);
-
-  // useEffect(() => {
-  //   const contacts = JSON.parse(localStorage.getItem('contact'));
-
-  //   if (contacts?.length) {
-  //     setContacts(contacts);
-  //   }
-  //   setTimeout(() => {
-  //     //тормоз считывания для дубляжа
-  //     firstRender.current = false;
-  //   }, 0);
-  // }, []);
-
-  // const addContact = ({ name, number }) => {
-  //   if (contacts.find(contact => contact.name === name)) {
-  //     alert(`${name} is already in contacts`);
-  //     return;
-  //   }
-  //   const newContacts = {
-  //     name,
-  //     number,
-  //     id: nanoid(),
-  //   };
-  //   setContacts(prevState => [...prevState, newContacts]);
-  // };
-  // const removeContact = id => {
-  //   setContacts(prevContacts => prevContacts.filter(item => item.id !== id));
-  // };
-  // const handleFilter = ({ target }) => setFilter(target.value);
-  // const getFilterContact = () => {
-  //   if (!filter) {
-  //     return contacts;
-  //   }
-  //   const filterValue = filter.toLowerCase();
-  //   const filterContact = contacts.filter(({ name }) => {
-  //     const nameValue = name.toLowerCase();
-  //     return nameValue.includes(filterValue.trim());
-  //   });
-  //   return filterContact;
-  // };
-
-  // const filterContact = getFilterContact();
   return (
     <AppStyled>
       <Container title="Phonebook">

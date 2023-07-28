@@ -1,40 +1,10 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import {
+  fetchContactThunk,
+  addContactThunk,
+  deleteContactsThunk,
+} from './phoneBook-operation';
 
-import { addContacts, deleteContacts, getContacts } from 'shared/api';
-export const fetchContactThunk = createAsyncThunk(
-  'contact/fetchContactThunk',
-  async (_, thunkAPI) => {
-    try {
-      const data = await getContacts();
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-export const addContactThunk = createAsyncThunk(
-  'contact/addContactThunk',
-  async (data, thunkAPI) => {
-    try {
-      const result = await addContacts(data);
-      return result;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-
-export const deleteContactsThunk = createAsyncThunk(
-  'contact/deleteContactsThunk',
-  async (id, thunkAPI) => {
-    try {
-      const result = await deleteContacts(id);
-      return result;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
 const initialState = {
   contacts: [
     // { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -51,27 +21,7 @@ const contactsReducer = createSlice({
   error: null,
 
   reducers: {
-    // add: {
-    //   reducer: (prevStore, { payload }) => {
-    //     const newStore = {
-    //       ...prevStore,
-    //       contacts: [...prevStore.contacts, payload],
-    //     };
-    //     return newStore;
-    //   },
 
-    //   prepare: (data) => {
-    //     return { payload: { id: nanoid(), ...data } };
-    //   },
-    // },
-
-    // remove: (store, { payload }) => {
-    //   const newStore = {
-    //     ...store,
-    //     contacts: [...store.contacts.filter((item) => item.id !== payload)],
-    //   };
-    //   return newStore;
-    // },
     filter: (store, { payload }) => {
       store.filter = payload;
     },
